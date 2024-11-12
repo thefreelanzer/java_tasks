@@ -6,13 +6,13 @@ import java.util.Random;
 
 public class NumberGame {
     private static Scanner sc = new Scanner(System.in);
-    private static int attempt = 0;
     private static int score = 0;
+    private static int inputNumber = 0;
 
     public static void main(String[] arr) {
         int tempNumber;
         int currentInput;
-        while (attempt < 5) {
+        for (int i = 0; i < 5; i++) {
             tempNumber = generateRandomNumber();
             currentInput = scanNumber();
             System.out.println("tempNumber:" + tempNumber);
@@ -20,7 +20,6 @@ public class NumberGame {
             if (tempNumber == currentInput) {
                 score += 5;
             }
-            attempt++;
         }
         System.out.println("Score:" + score);
     }
@@ -36,17 +35,16 @@ public class NumberGame {
     }
 
     /**
-     * Receiving user input
+     * Receiving user input and checking the number is in between 1-100
      *
      * @return a number that user entered
      */
     private static int scanNumber() {
-        int number = 0;
         System.out.print("Enter a random number 1-100:");
-        number = sc.nextInt();
-        if (number < 1 || number > 100) {
+        inputNumber = sc.nextInt();
+        if (inputNumber < 1 || inputNumber > 100) {
             scanNumber();
         }
-        return number;
+        return inputNumber;
     }
 }
