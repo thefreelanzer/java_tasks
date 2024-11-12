@@ -8,10 +8,15 @@ public class NumberGame {
     private static Scanner sc = new Scanner(System.in);
     private static int score = 0;
     private static int inputNumber = 0;
+    private static String name;
 
     public static void main(String[] arr) {
         int tempNumber;
         int currentInput;
+
+        System.out.print("Enter your name:");
+        name = sc.nextLine();
+
         for (int i = 0; i < 5; i++) {
             tempNumber = generateRandomNumber();
             currentInput = scanNumber();
@@ -21,7 +26,7 @@ public class NumberGame {
                 score += 5;
             }
         }
-        System.out.println("Score:" + score);
+        System.out.println("Hai " + name +". Your Score:" + score);
     }
 
     /**
