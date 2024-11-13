@@ -53,8 +53,12 @@ public class Grade {
         }
     }
 
+    /**
+     * Finding Total marks in each subject and average
+     */
     private static void getSubjectavg() {
         int sum = 0;
+        int numberOfSubjects = subjects.length;
         float avg;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -62,7 +66,7 @@ public class Grade {
             }
             System.out.println("\n");
             System.out.println("Class Total in " + subjects[i] + "is " + sum);
-            avg = (float) sum / 5;
+            avg = (float) sum / numberOfSubjects;
             System.out.println("Average in " + subjects[i] + "is " + avg);
             sum = 0;
         }
