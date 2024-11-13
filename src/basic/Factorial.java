@@ -12,8 +12,8 @@ public class Factorial {
         int number = sc.nextInt();
         int result = getFactorial(number);
 
-        System.out.println("Entered Number is: " + number);
-        System.out.println("Factorial is: " + result);
+        System.out.println(String.format("Entered Number is: %d",number));
+        System.out.println(String.format("Factorial is: %d",result));
     }
 
     private static int getFactorial(int number) {

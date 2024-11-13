@@ -9,14 +9,6 @@ public class SentenceValidation {
     }
 
     public static boolean isValid(String s) {
-        /**
-         * creates a stack data structure specifically for storing Character objects
-         *
-         * Stack is a class in Java’s java.util package that represents a Last In, First Out (LIFO) stack of objects
-         *
-         * <Character> -> generic type parameter
-         * This means the stack will only accept Character data types
-         */
         Stack<Character> stack = new Stack<>();
 
         // convert string to character array
