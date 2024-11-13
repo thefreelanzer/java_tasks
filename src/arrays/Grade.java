@@ -62,8 +62,8 @@ public class Grade {
             }
             System.out.println("\n");
             System.out.println("Class Total in " + subjects[i] + "is " + sum);
-            avg = (float) sum/5;
-            System.out.println("Avarage in" + subjects[i] + "is " + avg);
+            avg = (float) sum / 5;
+            System.out.println("Average in " + subjects[i] + "is " + avg);
             sum = 0;
         }
     }
