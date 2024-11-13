@@ -4,20 +4,20 @@ package arrays;
 import java.util.Arrays;
 
 public class Grade {
+    private static String students[] = {"Ethan", "Sophia", "Liam", "Isabella", "Noah"};
+    private static String subjects[] = {"Mathematics", "Biology", "Chemistry", "History", "Literature"};
+    private static int marks[][] = {
+            {50, 71, 99, 55, 59},
+            {55, 72, 49, 65, 69},
+            {59, 73, 89, 75, 79},
+            {58, 78, 99, 85, 89},
+            {90, 99, 99, 99, 100},
+    };
+
     public static void main(String[] arr) {
 
-        int marks[] = {50, 78, 79, 65, 69};
-
-        // Using Arrays.stream() to calculate the sum
-        int marksObtained = Arrays.stream(marks).sum();
-
-        // Calculate percentage
-        double percentage = getPercentage(marksObtained);
-        String grade = getGrade(percentage);
-
-        System.out.println("Total Marks: " + marksObtained);
-        System.out.println("Percentage: " + percentage);
-        System.out.println("Grade: " + grade);
+        getIndividualgrades();
+        getSubjectavg();
     }
 
     private static double getPercentage(int marksObtained) {
@@ -34,5 +34,37 @@ public class Grade {
             case 4 -> "C";
             default -> "D";
         };
+    }
+
+    private static void getIndividualgrades() {
+        String grade;
+        int marksObtained;
+        double percentage;
+        for (int i = 0; i < 5; i++) {
+            marksObtained = Arrays.stream(marks[i]).sum();
+            // Calculate percentage
+            percentage = getPercentage(marksObtained);
+            grade = getGrade(percentage);
+            System.out.println(
+                    "Student: " + students[i] +
+                            ". Total Marks Obtained: " + marksObtained +
+                            ". Percentage: " + percentage +
+                            ". Grade: " + grade);
+        }
+    }
+
+    private static void getSubjectavg() {
+        int sum = 0;
+        float avg;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                sum += marks[i][j];
+            }
+            System.out.println("\n");
+            System.out.println("Class Total in " + subjects[i] + "is " + sum);
+            avg = (float) sum/5;
+            System.out.println("Avarage in" + subjects[i] + "is " + avg);
+            sum = 0;
+        }
     }
 }
