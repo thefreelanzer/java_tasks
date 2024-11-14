@@ -72,11 +72,4 @@ public class Student {
     public boolean isEligibleforAdmission() {
         return this.gpa > 3;
     }
-
-    public static void main(String[] arr) {
-        Student student = new Student(1, "John", "Computer Engineering", 2.5);
-        String msg = student.isEligibleforAdmission() ? "eligible" : "not eligible";
-        System.out.println(String.format("%s is %s for Higher Studies.", student.getName(), msg));
-    }
-
 }
