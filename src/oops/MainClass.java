@@ -10,5 +10,8 @@ public class MainClass {
         i.getGender("MALE");
         i.getCity("DHANBAD");
         i.getCountry("INDIA"); // Compile-time error because we cannot access newly added method in subclass using superclass reference.
+
+        Rectangle r1 = new Rectangle();
+        r1.getArea(5, 6);
     }
 }
