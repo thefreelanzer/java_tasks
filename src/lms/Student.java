@@ -7,7 +7,7 @@ public class Student extends User {
     /**
      * declares a private List<String> named enrolledCourses and initializes it as a new empty ArrayList
      */
-    private List<String> enrolledCourses = new ArrayList<>();
+    private String enrolledCourses = "";
 
     /**
      * defines the constructor for the Student
@@ -31,16 +31,12 @@ public class Student extends User {
         System.out.println("Courses enrolled by " + name + ": " + enrolledCourses);
     }
 
-    public List<String> getEnrolledCourses() {
-        return enrolledCourses;
-    }
-
-    public void setEnrolledCourses(List<String> enrolledCourses) {
-        this.enrolledCourses = enrolledCourses;
+    public String getEnrolledCourses() {
+        return enrolledCourses.isEmpty() ? "None" : enrolledCourses;
     }
 
     public void enrollCourse(String course) {
-        enrolledCourses.add(course);
+        enrolledCourses = course;
     }
 
     @Override

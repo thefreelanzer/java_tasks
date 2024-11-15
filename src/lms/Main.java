@@ -243,7 +243,9 @@ public class Main {
                 printMessage("Enrolled Courses: " + student.getEnrolledCourses() + "\n");
             }
             case 2 -> {
-                setCourse(student);
+                String selectedCourse = setCourse();
+                student.enrollCourse(selectedCourse);
+                printMessage("You have successfully enrolled in: " + selectedCourse);
             }
             case 3 -> {
                 handleUserInput();
@@ -265,7 +267,9 @@ public class Main {
                 printMessage("Enrolled Courses: " + instructor.getEnrolledCourses() + "\n");
             }
             case 2 -> {
-                setIntructorCourse(instructor);
+                String selectedCourse = setCourse();
+                instructor.enrollCourse(selectedCourse);
+                printMessage("You have successfully enrolled in: " + selectedCourse);
             }
             case 3 -> {
                 handleUserInput();
@@ -273,7 +277,7 @@ public class Main {
         }
     }
 
-    private static void setCourse(Student student) {
+    private static String setCourse() {
         printMessage("Available Courses:");
         List<Map.Entry<String, Courses>> courseList = new ArrayList<>(courses.entrySet());
 
@@ -284,40 +288,16 @@ public class Main {
             printMessage((i + 1) + ". " + course.getCourseName());
         }
 
-        printMessage("Enter the number of the course you want to enroll in:");
-        int selectedCourseNumber = sc.nextInt();
+        while (true) { // Validation loop
+            printMessage("Enter the number of the course you want to enroll in:");
+            int selectedCourseNumber = sc.nextInt();
 
-        // Validate the selected number
-        if (selectedCourseNumber > 0 && selectedCourseNumber <= courseList.size()) {
-            Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
-            student.enrollCourse(selectedCourse.getCourseName());
-            printMessage("You have successfully enrolled in: " + selectedCourse.getCourseName());
-        } else {
-            printMessage("Invalid selection. Please try again.");
-        }
-    }
-
-    private static void setIntructorCourse(Instructor instructor) {
-        printMessage("Available Courses:");
-        List<Map.Entry<String, Courses>> courseList = new ArrayList<>(courses.entrySet());
-
-        // Display all available courses
-        for (int i = 0; i < courseList.size(); i++) {
-            Map.Entry<String, Courses> entry = courseList.get(i);
-            Courses course = entry.getValue();
-            printMessage((i + 1) + ". " + course.getCourseName());
-        }
-
-        printMessage("Enter the number of the course you want to enroll in:");
-        int selectedCourseNumber = sc.nextInt();
-
-        // Validate the selected number
-        if (selectedCourseNumber > 0 && selectedCourseNumber <= courseList.size()) {
-            Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
-            instructor.enrollCourse(selectedCourse.getCourseName());
-            printMessage("You have successfully enrolled in: " + selectedCourse.getCourseName());
-        } else {
-            printMessage("Invalid selection. Please try again.");
+            if (selectedCourseNumber > 0 && selectedCourseNumber <= courseList.size()) {
+                Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
+                return selectedCourse.getCourseName();
+            } else {
+                printMessage("Invalid selection. Please try again.");
+            }
         }
     }
 }
