@@ -26,6 +26,7 @@ abstract class User {
     public String getUserName() {
         return this.username;
     }
+
     public String getName() {
         return this.name;
     }
@@ -34,5 +35,17 @@ abstract class User {
      * created abstract method in common this will be overridden
      */
     public abstract void displayCourses();
+
+
+    /**
+     * Static factory method to create a User based on type
+     */
+    public static User createUser(int userType, String name, String username, String password) {
+        return switch (userType) {
+            case 1 -> new Student(name, username, password);
+            case 2 -> new Instructor(name, username, password);
+            default -> null;
+        };
+    }
 }
 

@@ -12,6 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         printMessage("Welcome to the Learning Management System!");
+        // Initialize the default admin
+        createAdmin();
         handleUserInput();
     }
 
@@ -98,10 +100,7 @@ public class Main {
         int userType = sc.nextInt();
         sc.nextLine();
 
-        User user = switch (userType) {
-            case 1 -> new Student(name, username, password);
-            default -> null;
-        };
+        User user = User.createUser(userType, name, username, password);
 
         if (user != null) {
             users.put(username, user);
@@ -136,5 +135,11 @@ public class Main {
         } else {
             System.out.println("User not found.");
         }
+    }
+
+    private static void createAdmin() {
+        User user = User.createUser(1, "admin", "admin", "1234");
+        users.put("admin", user);
+        System.out.println(users);
     }
 }
