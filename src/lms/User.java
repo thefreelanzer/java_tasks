@@ -79,6 +79,7 @@ abstract class User {
     // Methods to list users by type
     public static void listAllStudents() {
         for (Student student : students) {
+            System.out.println(student);
             System.out.println(student.getName() + " (" + student.getUserName() + ")");
         }
     }
