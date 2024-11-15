@@ -9,11 +9,15 @@ public class Main {
     private static final Scanner sc = new Scanner(System.in);
     // A static map to store users, with the username as the key and the User object as the value.
     private static Map<String, User> users = new HashMap<>();
+    private static final Map<String, Courses> courses = new HashMap<>();
 
     public static void main(String[] args) {
         printMessage("Welcome to the Learning Management System!");
         // Initialize the default admin
         createAdmin();
+        createCourses();
+        listAllCourses();
+
         handleUserInput();
     }
 
@@ -106,10 +110,10 @@ public class Main {
             users.put(username, user);
             System.out.println("User registered successfully!");
             System.out.println(users);
-            handleUserInput();
         } else {
             System.out.println("Invalid user type selected.");
         }
+        handleUserInput();
     }
 
     /**
@@ -125,7 +129,6 @@ public class Main {
         printMessage("Please enter password:");
         String password = sc.nextLine();
 
-        System.out.println("Username: " + username);
         // get user using username
         User user = users.get(username);
 
@@ -133,13 +136,49 @@ public class Main {
         if (user != null && user.password.equals(password)) {
             System.out.println("User found: " + user);
         } else {
-            System.out.println("User not found.");
+            System.out.println("User not found! If you are not registered, please sign up.");
+            handleUserInput();
         }
     }
 
     private static void createAdmin() {
-        User user = User.createUser(1, "admin", "admin", "1234");
+        //userType 3 - Admin
+        User user = User.createUser(3, "admin", "admin", "1234");
         users.put("admin", user);
         System.out.println(users);
+    }
+
+    private static void createCourses() {
+        String[] courseNames = {
+                "Introduction to Java",
+                "Data Structures",
+                "Web Development",
+                "Database Systems",
+                "Software Engineering",
+                "Python Programming",
+                "Cloud Computing",
+                "Machine Learning",
+                "Cybersecurity Basics",
+                "Mobile App Development"
+        };
+        for (int i = 0; i < courseNames.length; i++) {
+            String courseId = "C" + (i + 1);
+            Courses course = new Courses(courseId, courseNames[i]);
+            courses.put(courseId, course);
+        }
+    }
+
+    private static void listAllCourses() {
+        if (courses.isEmpty()) {
+            printMessage("No courses available.");
+            return;
+        }
+
+        // Loop through the courses map and print each course
+        for (Map.Entry<String, Courses> entry : courses.entrySet()) {
+            String courseId = entry.getKey();
+            Courses course = entry.getValue();
+            printMessage("Course ID: " + courseId + ", Name: " + course.getCourseName());
+        }
     }
 }

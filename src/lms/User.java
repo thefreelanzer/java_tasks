@@ -44,6 +44,7 @@ abstract class User {
         return switch (userType) {
             case 1 -> new Student(name, username, password);
             case 2 -> new Instructor(name, username, password);
+            case 3 -> new Admin(name, username, password);
             default -> null;
         };
     }
