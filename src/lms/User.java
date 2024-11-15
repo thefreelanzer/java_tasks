@@ -24,6 +24,9 @@ abstract class User {
      * @return name
      */
     public String getUserName() {
+        return this.username;
+    }
+    public String getName() {
         return this.name;
     }
 

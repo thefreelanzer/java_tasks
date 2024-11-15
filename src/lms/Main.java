@@ -12,6 +12,13 @@ public class Main {
 
     public static void main(String[] args) {
         printMessage("Welcome to the Learning Management System!");
+        handleUserInput();
+    }
+
+    /**
+     * Method to handle user input by reading an option and processing it.
+     */
+    private static void handleUserInput() {
         int inputOption = readInput();
         processInput(inputOption);
     }
@@ -63,11 +70,10 @@ public class Main {
     private static void processInput(int option) {
         switch (option) {
             case 1 -> {
-                printMessage("You selected Register.");
                 registerUser();
             }
             case 2 -> {
-                printMessage("You selected Login.");
+                loginUser();
             }
             case 3 -> {
                 printMessage("Exiting the system. Goodbye!");
@@ -101,8 +107,34 @@ public class Main {
             users.put(username, user);
             System.out.println("User registered successfully!");
             System.out.println(users);
+            handleUserInput();
         } else {
             System.out.println("Invalid user type selected.");
+        }
+    }
+
+    /**
+     * method to performs login functionality
+     */
+    private static void loginUser() {
+        // Consume the newline left over after reading the name
+        sc.nextLine();
+
+        printMessage("Please enter username:");
+        String username = sc.nextLine();
+
+        printMessage("Please enter password:");
+        String password = sc.nextLine();
+
+        System.out.println("Username: " + username);
+        // get user using username
+        User user = users.get(username);
+
+        // If the user exists, print their details
+        if (user != null && user.password.equals(password)) {
+            System.out.println("User found: " + user);
+        } else {
+            System.out.println("User not found.");
         }
     }
 }
