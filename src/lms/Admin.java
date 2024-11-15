@@ -9,4 +9,9 @@ public class Admin extends User {
     public void displayCourses() {
         System.out.println("Admin " + username + " manages all courses.");
     }
+
+    @Override
+    public String getUserType() {
+        return "Admin";
+    }
 }

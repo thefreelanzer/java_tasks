@@ -42,4 +42,9 @@ public class Student extends User {
     public void enrollCourse(String course) {
         enrolledCourses.add(course);
     }
+
+    @Override
+    public String getUserType() {
+        return "Student";
+    }
 }

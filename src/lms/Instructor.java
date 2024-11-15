@@ -43,4 +43,9 @@ public class Instructor extends User {
     public void enrollCourse(String course) {
         teachingCourses.add(course);
     }
+
+    @Override
+    public String getUserType() {
+        return "Instructor";
+    }
 }

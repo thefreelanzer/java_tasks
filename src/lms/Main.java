@@ -16,7 +16,6 @@ public class Main {
         // Initialize the default admin
         createAdmin();
         createCourses();
-        listAllCourses();
 
         handleUserInput();
     }
@@ -134,13 +133,28 @@ public class Main {
 
         // If the user exists, print their details
         if (user != null && user.password.equals(password)) {
-            System.out.println("User found: " + user);
+            printMessage(user.getUserType());
+            switch (user.getUserType()) {
+                case "Student" -> {
+                    printMessage("You are a Student!");
+                }
+                case "Instructor" -> {
+                    printMessage("You are a Instructor!");
+                }
+                case "Admin" -> {
+                    printMessage("You are a Admin!");
+                    adminMenus();
+                }
+            }
         } else {
             System.out.println("User not found! If you are not registered, please sign up.");
             handleUserInput();
         }
     }
 
+    /**
+     * creating admin
+     */
     private static void createAdmin() {
         //userType 3 - Admin
         User user = User.createUser(3, "admin", "admin", "1234");
@@ -148,6 +162,9 @@ public class Main {
         System.out.println(users);
     }
 
+    /**
+     * Method used to add 10 courses
+     */
     private static void createCourses() {
         String[] courseNames = {
                 "Introduction to Java",
@@ -180,5 +197,36 @@ public class Main {
             Courses course = entry.getValue();
             printMessage("Course ID: " + courseId + ", Name: " + course.getCourseName());
         }
+    }
+
+    private static void adminMenus() {
+        // Consume the newline left over after reading the name
+//        sc.nextLine();
+        printMessage("1. Students:");
+        printMessage("2. Instructors:");
+        printMessage("3. Admins:");
+        printMessage("4. Courses:");
+        printMessage("5. Logout:");
+        printMessage("Please choose an option:");
+        int option = sc.nextInt();
+
+        switch (option) {
+            case 1 -> {
+                User.listAllStudents();
+            }
+            case 2 -> {
+                User.listAllInstructors();
+            }
+            case 3 -> {
+                User.listAllAdmins();
+            }
+            case 4 -> {
+                listAllCourses();
+            }
+            case 5 -> {
+                handleUserInput();
+            }
+        }
+        adminMenus();
     }
 }

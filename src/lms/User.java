@@ -1,9 +1,16 @@
 package lms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 abstract class User {
     protected String name;
     protected String username;
     protected String password;
+
+    private static List<Student> students = new ArrayList<>();
+    private static List<Instructor> instructors = new ArrayList<>();
+    private static List<Admin> admins = new ArrayList<>();
 
     /**
      * constructor
@@ -41,12 +48,51 @@ abstract class User {
      * Static factory method to create a User based on type
      */
     public static User createUser(int userType, String name, String username, String password) {
-        return switch (userType) {
-            case 1 -> new Student(name, username, password);
-            case 2 -> new Instructor(name, username, password);
-            case 3 -> new Admin(name, username, password);
-            default -> null;
-        };
+        switch (userType) {
+            case 1 -> {
+                Student student = new Student(name, username, password);
+                students.add(student);  // Add student to the list
+                return student;
+            }
+            case 2 -> {
+                Instructor instructor = new Instructor(name, username, password);
+                instructors.add(instructor);  // Add instructor to the list
+                return instructor;
+            }
+            case 3 -> {
+                Admin admin = new Admin(name, username, password);
+                admins.add(admin);  // Add admin to the list
+                return admin;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * abstract method to return userType
+     */
+    public abstract String getUserType();
+
+
+    // Methods to list users by type
+    public static void listAllStudents() {
+        for (Student student : students) {
+            System.out.println(student.getName() + " (" + student.getUserName() + ")");
+        }
+    }
+
+    public static void listAllInstructors() {
+        for (Instructor instructor : instructors) {
+            System.out.println(instructor.getName() + " (" + instructor.getUserName() + ")");
+        }
+    }
+
+    public static void listAllAdmins() {
+        for (Admin admin : admins) {
+            System.out.println(admin.getName() + " (" + admin.getUserName() + ")");
+        }
     }
 }
 
