@@ -329,26 +329,27 @@ public class Main {
 
     private static void showCourseDetails() {
         printMessage("Choose course:");
-        int course = sc.nextInt();
+        int selectedCourseNumber = sc.nextInt();
         List<Map.Entry<String, Courses>> courseList = new ArrayList<>(courses.entrySet());
 
-        printMessage("1. Basic Details:");
-        printMessage("2. Instructor:");
-        printMessage("Choose choose an option:");
-        int selectedCourseNumber = sc.nextInt();
-        switch (selectedCourseNumber) {
-            case 1 -> {
-                if (selectedCourseNumber <= courseList.size()) {
-                    Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
+        if (selectedCourseNumber <= courseList.size()) {
+            Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
+            printMessage("1. Basic Details:");
+            printMessage("2. Instructor:");
+            printMessage("Choose choose an option:");
+            int option = sc.nextInt();
+            switch (option) {
+                case 1 -> {
                     SelfLearningCourse selfLearningCourse = new SelfLearningCourse(selectedCourse.getId(), selectedCourse.getCourseName(), selectedCourse.getDuration(), selectedCourse.getFee());
                     selfLearningCourse.displayCourseStructure();
-                } else {
-                    printMessage("Invalid selection. Please try again.");
+                }
+                case 2 -> {
+
                 }
             }
-            case 2 -> {
-
-            }
+        } else {
+            printMessage("Invalid selection. Please try again.");
+            showCourseDetails();
         }
     }
 }
