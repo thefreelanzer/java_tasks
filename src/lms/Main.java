@@ -1,5 +1,6 @@
 package lms;
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Main {
@@ -246,6 +247,14 @@ public class Main {
                 String selectedCourse = setCourse();
                 student.enrollCourse(selectedCourse);
                 printMessage("You have successfully enrolled in: " + selectedCourse);
+
+                //process payment
+                printMessage("\nPlease choose payment method:");
+                printMessage("1. Credit Card:");
+                printMessage("2. Upi:");
+                printMessage("Please choose an option:");
+                int paymentOption = sc.nextInt();
+                handlePayment(paymentOption);
             }
             case 3 -> {
                 handleUserInput();
@@ -297,6 +306,20 @@ public class Main {
                 return selectedCourse.getCourseName();
             } else {
                 printMessage("Invalid selection. Please try again.");
+            }
+        }
+    }
+
+    public static void handlePayment(int paymentOption) {
+        switch (paymentOption) {
+            case 1 -> {
+                PaymentHandler.processPayment(new CreditCardPayment(), 2000);
+            }
+            case 2 -> {
+                PaymentHandler.processPayment(new UpiPayment(), 2000);
+            }
+            default -> {
+                System.out.println("Unable to process payment!!");
             }
         }
     }

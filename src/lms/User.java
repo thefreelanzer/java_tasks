@@ -80,13 +80,13 @@ abstract class User {
     public static void listAllStudents() {
         for (Student student : students) {
             System.out.println(student);
-            System.out.println(student.getName() + " (" + student.getUserName() + ")");
+            System.out.println(student.getName() + " (" + student.getUserName() + ") - " + student.getEnrolledCourses());
         }
     }
 
     public static void listAllInstructors() {
         for (Instructor instructor : instructors) {
-            System.out.println(instructor.getName() + " (" + instructor.getUserName() + ")");
+            System.out.println(instructor.getName() + " (" + instructor.getUserName() + ") - " + instructor.getEnrolledCourses());
         }
     }
 
