@@ -11,6 +11,7 @@ public class Student extends User {
 
     /**
      * defines the constructor for the Student
+     *
      * @param name
      * @param username
      * @param password
@@ -42,5 +43,10 @@ public class Student extends User {
     @Override
     public String getUserType() {
         return "Student";
+    }
+
+    public static void processPayment(PaymentMethod paymentMethod, double courseFee) {
+        String result = paymentMethod.processPayment(courseFee);
+        System.out.println(result);
     }
 }

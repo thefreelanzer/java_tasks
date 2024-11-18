@@ -182,7 +182,7 @@ public class Main {
         };
         for (int i = 0; i < courseNames.length; i++) {
             String courseId = "C" + (i + 1);
-            Courses course = new Courses(courseId, courseNames[i]);
+            Courses course = new SelfLearningCourse(courseId, courseNames[i], 10, 2000);
             courses.put(courseId, course);
         }
     }
@@ -194,10 +194,12 @@ public class Main {
         }
 
         // Loop through the courses map and print each course
+        int i = 1;
         for (Map.Entry<String, Courses> entry : courses.entrySet()) {
             String courseId = entry.getKey();
             Courses course = entry.getValue();
-            printMessage("Course ID: " + courseId + ", Name: " + course.getCourseName());
+            printMessage(i + "-> Course ID: " + courseId + ", Name: " + course.getCourseName());
+            i++;
         }
     }
 
@@ -222,6 +224,7 @@ public class Main {
             }
             case 4 -> {
                 listAllCourses();
+                showCourseDetails();
             }
             case 5 -> {
                 handleUserInput();
@@ -313,13 +316,38 @@ public class Main {
     public static void handlePayment(int paymentOption) {
         switch (paymentOption) {
             case 1 -> {
-                PaymentHandler.processPayment(new CreditCardPayment(), 2000);
+                Student.processPayment(new CreditCardPayment(), 2000);
             }
             case 2 -> {
-                PaymentHandler.processPayment(new UpiPayment(), 2000);
+                Student.processPayment(new UpiPayment(), 2000);
             }
             default -> {
                 System.out.println("Unable to process payment!!");
+            }
+        }
+    }
+
+    private static void showCourseDetails() {
+        printMessage("Choose course:");
+        int course = sc.nextInt();
+        List<Map.Entry<String, Courses>> courseList = new ArrayList<>(courses.entrySet());
+
+        printMessage("1. Basic Details:");
+        printMessage("2. Instructor:");
+        printMessage("Choose choose an option:");
+        int selectedCourseNumber = sc.nextInt();
+        switch (selectedCourseNumber) {
+            case 1 -> {
+                if (selectedCourseNumber <= courseList.size()) {
+                    Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
+                    SelfLearningCourse selfLearningCourse = new SelfLearningCourse(selectedCourse.getId(), selectedCourse.getCourseName(), selectedCourse.getDuration(), selectedCourse.getFee());
+                    selfLearningCourse.displayCourseStructure();
+                } else {
+                    printMessage("Invalid selection. Please try again.");
+                }
+            }
+            case 2 -> {
+
             }
         }
     }
