@@ -17,6 +17,6 @@ public class InstructorLeadingCourse extends Courses {
         System.out.println("Duration: " + duration + " hours");
         System.out.println("Fee: $" + fee);
         System.out.println("Instructor: " + instructorName);
-        System.out.println("Class Schedule: " + classSchedule);
+        System.out.println("Class Schedule: " + classSchedule + "\n");
     }
 }

@@ -334,22 +334,28 @@ public class Main {
 
         if (selectedCourseNumber <= courseList.size()) {
             Courses selectedCourse = courseList.get(selectedCourseNumber - 1).getValue();
+            String courseId = selectedCourse.getId();
+            String courseName = selectedCourse.getCourseName();
+            int duration = selectedCourse.getDuration();
+            double fee = selectedCourse.getFee();
             printMessage("1. Basic Details:");
             printMessage("2. Instructor:");
             printMessage("Choose choose an option:");
             int option = sc.nextInt();
             switch (option) {
                 case 1 -> {
-                    SelfLearningCourse selfLearningCourse = new SelfLearningCourse(selectedCourse.getId(), selectedCourse.getCourseName(), selectedCourse.getDuration(), selectedCourse.getFee());
+                    SelfLearningCourse selfLearningCourse = new SelfLearningCourse(courseId, courseName, duration, fee);
                     selfLearningCourse.displayCourseStructure();
                 }
                 case 2 -> {
-
+                    InstructorLeadingCourse instructorLeadingCourse = new InstructorLeadingCourse(courseId, courseName, duration, fee, "John Doe", "Monday to Friday - 9 PM to 5 PM");
+                    instructorLeadingCourse.displayCourseStructure();
                 }
             }
         } else {
             printMessage("Invalid selection. Please try again.");
             showCourseDetails();
         }
+        adminMenus();
     }
 }
