@@ -5,9 +5,14 @@ public class StudentMain {
         StudentActivity studentActivity = new StudentActivity("John Doe");
 
         // Create functional interface references
-        StudentTask learnTask = studentActivity::learningNote;
-        StudentTask quizTask = studentActivity::attendingQuiz;
-        StudentTask assignmentTask = studentActivity::submittingAssignment;
+        // StudentTask learnTask = studentActivity::learningNote;
+        // StudentTask quizTask = studentActivity::attendingQuiz;
+        // StudentTask assignmentTask = studentActivity::submittingAssignment;
+
+        // Create functional interface references using lambda expressions
+        StudentTask learnTask = () -> studentActivity.learningNote();
+        StudentTask quizTask = () -> studentActivity.attendingQuiz();
+        StudentTask assignmentTask = () -> studentActivity.submittingAssignment();
 
         learnTask.executeTask();
         quizTask.executeTask();
