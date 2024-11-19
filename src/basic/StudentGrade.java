@@ -20,12 +20,13 @@ public class StudentGrade {
     }
 
     private static int readMark() {
+        int marksObtained = 0;
         while (true) {
             System.out.print("Enter the marks obtained by the student (out of 500): ");
             String input = sc.nextLine();
 
             try {
-                int marksObtained = Integer.parseInt(input);
+                marksObtained = Integer.parseInt(input);
                 if (marksObtained < 0 || marksObtained > 500) {
                     throw new IllegalArgumentException("Marks must be between 0 and 500.");
                 }
