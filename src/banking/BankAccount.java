@@ -3,7 +3,7 @@ package banking;
 public class BankAccount {
     public int accountNumber;
     public String accountHolderName;
-    public static double currentBalance = 0;
+    public double currentBalance = 0;
 
     public BankAccount(int accountNumber, String accountHolderName, double currentBalance) {
         this.accountHolderName = accountHolderName;
