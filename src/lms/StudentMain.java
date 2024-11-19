@@ -9,7 +9,7 @@ public class StudentMain {
         // StudentTask quizTask = studentActivity::attendingQuiz;
         // StudentTask assignmentTask = studentActivity::submittingAssignment;
 
-        // Create functional interface references using lambda expressions
+        // Interface references using lambda expressions
         StudentTask learnTask = () -> studentActivity.learningNote();
         StudentTask quizTask = () -> studentActivity.attendingQuiz();
         StudentTask assignmentTask = () -> studentActivity.submittingAssignment();
