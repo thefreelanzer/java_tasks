@@ -23,9 +23,8 @@ public class Main {
         // Print all courses
         listAllCourses(courses);
 
-        Course selectedCourse = courses.getFirst();
-        Course updatedCourse = selectedCourse.enrollStudent(students.get(1));
-        courses.set(0, updatedCourse);
+        Course selectedCourse = courses.getFirst(); // get first element
+        selectedCourse.enrollStudent(students.get(1));
 
         // Print all courses
         listAllCourses(courses);
