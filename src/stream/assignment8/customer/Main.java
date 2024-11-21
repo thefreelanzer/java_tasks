@@ -3,7 +3,9 @@ package stream.assignment8.customer;
 import stream.Employee;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -17,17 +19,17 @@ public class Main {
 
 
         List<CustomerDto> customerDtos = customers.stream()
-                .map(c -> createCustomerDtoSupplier(c).get())
-                .toList();
+                .map(c -> new CustomerDto(
+                        c.getId(),
+                        c.getName(),
+                        c.getEmail(),
+                        c.getAddress()))
+                .collect(Collectors.toList());
         customerDtos.forEach(dto -> System.out.println(dto.toString()));
-    }
 
-    public static Supplier<CustomerDto> createCustomerDtoSupplier(Customer customer) {
-        return () -> new CustomerDto(
-                customer.getId(),
-                customer.getName(),
-                customer.getEmail(),
-                customer.getAddress()
-        );
+        List<Integer> numbers = Arrays.asList(101, 21, 30, 48, 54, 30, 21, 64, 74, 54, 81);
+        Set<Integer> uniqueNumbers = numbers.stream()
+                .collect(Collectors.toSet());
+        System.out.println(uniqueNumbers);
     }
 }
