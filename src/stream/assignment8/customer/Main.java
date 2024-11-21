@@ -15,13 +15,19 @@ public class Main {
         Customer customer = customerSupplier.get();
         customers.add(customer);
 
+
         List<CustomerDto> customerDtos = customers.stream()
-                .map(c -> new CustomerDto(
-                        c.getId(),
-                        c.getName(),
-                        c.getEmail(),
-                        c.getAddress()))
-                .collect(Collectors.toList());
+                .map(c -> createCustomerDtoSupplier(c).get())
+                .toList();
         customerDtos.forEach(dto -> System.out.println(dto.toString()));
+    }
+
+    public static Supplier<CustomerDto> createCustomerDtoSupplier(Customer customer) {
+        return () -> new CustomerDto(
+                customer.getId(),
+                customer.getName(),
+                customer.getEmail(),
+                customer.getAddress()
+        );
     }
 }
