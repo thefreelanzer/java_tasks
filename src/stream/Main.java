@@ -12,9 +12,13 @@ public class Main {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
 
+        Supplier<Employee> employeeSupplier = () -> new Employee( 20,"Abc",65000);
+        Employee employee4 = employeeSupplier.get();
+
         employees.add(new Employee(1, "John doe", 50000));
         employees.add(new Employee(2, "James", 15000));
         employees.add(new Employee(3, "Jacob", 18000));
+        employees.add(employee4);
 
         // Increment salary
         Consumer<Employee> incrementSalary = employee -> {
