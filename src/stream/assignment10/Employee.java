@@ -93,10 +93,19 @@ public class Employee {
         employeesCountByDepartment.forEach((department, count) ->
                 System.out.println(department + ": " + count));
 
-        System.out.println("\nEmployees age > 25:");
-        employees.stream().filter(i -> i.getAge() > 25).forEach(i -> System.out.println(i.getName()));
-        System.out.println("\nEmployees age < 25:");
-        employees.stream().filter(i -> i.getAge() <= 25).forEach(i -> System.out.println(i.getName()));
+        // System.out.println("\nEmployees age > 25:");
+        // employees.stream().filter(i -> i.getAge() > 25).forEach(i -> System.out.println(i.getName()));
+        // System.out.println("\nEmployees age < 25:");
+        // employees.stream().filter(i -> i.getAge() <= 25).forEach(i -> System.out.println(i.getName()));
+
+        Map<Boolean, List<Employee>> partitionedEmployees = employees.stream()
+                .collect(Collectors.partitioningBy(emp -> emp.getAge() <= 25));
+
+        System.out.println("\nEmployees aged 25 or younger:");
+        partitionedEmployees.get(true).forEach(i -> System.out.println(i.getName()));
+
+        System.out.println("\nEmployees older than 25:");
+        partitionedEmployees.get(false).forEach(i -> System.out.println(i.getName()));
     }
 
 }
