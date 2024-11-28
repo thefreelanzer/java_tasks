@@ -6,6 +6,8 @@ import java.io.PipedOutputStream;
 import java.util.Scanner;
 
 public class ChatApp {
+    public boolean isUser1Turn;
+
     public static void main(String[] args) throws IOException {
         Chat chat = new Chat();
         PipedInputStream user1Input = new PipedInputStream();
@@ -78,5 +80,8 @@ public class ChatApp {
 
         user1.start();
         user2.start();
+    }
+
+    public void user1Chat(String message) {
     }
 }
