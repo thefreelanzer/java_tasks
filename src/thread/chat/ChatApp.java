@@ -81,7 +81,4 @@ public class ChatApp {
         user1.start();
         user2.start();
     }
-
-    public void user1Chat(String message) {
-    }
 }
