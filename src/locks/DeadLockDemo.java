@@ -1,5 +1,8 @@
 package locks;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -40,5 +43,25 @@ public class DeadLockDemo {
         DeadLockDemo demo = new DeadLockDemo();
         new Thread(demo::workerOne, "Worker 1").start();
         new Thread(demo::workerTwo, "Worker 2").start();
+
+        new Thread(() -> {
+            ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
+            while (true) {
+                long[] threadIds = mxBean.findDeadlockedThreads();
+                if (threadIds != null) {
+                    System.out.println("Deadlock Detected!");
+                    ThreadInfo[] threadInfos = mxBean.getThreadInfo(threadIds);
+                    for (long threadId : threadIds) {
+                        System.out.println("Thread with ID " + threadId + " is in Deadlock.");
+                    }
+                    break;
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
     }
 }
